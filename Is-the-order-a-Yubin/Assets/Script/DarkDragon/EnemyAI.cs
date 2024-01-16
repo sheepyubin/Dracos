@@ -46,11 +46,16 @@ public class EnemyAI : MonoBehaviour
 
     void MoveToTarget()
     {
-        float dir = target.position.x - transform.position.x;
-        float dird = target.position.y - transform.position.y;
-        dir = (dir < 0) ? -1 : 1;
-        transform.Translate(new Vector3(dir, dird) * enemy.moveSpeed * Time.deltaTime);
-        //enemyAnimator.SetBool("moving", true);
+        Vector3 directionToPlayer = target.position - transform.position;
+        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+
+        //if (distanceToPlayer < enemy.fieldOfVision && enemy.attacked)
+        {
+            transform.Translate(Vector3.right * enemy.moveSpeed * Time.deltaTime);
+        }
     }
 
     void FaceTarget()

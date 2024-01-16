@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
         if (name.Equals("DarkDragon"))
         {
-            SetEnemyStatus("DarkDragon", 100, 10, 1.5f, 2, 1.5f, 20f);
+            SetEnemyStatus("DarkDragon", 100, 10, 1.5f, 5, 1.5f, 20f);
         }
         nowHpbar = hpBar.transform.GetChild(0).GetComponent<Image>();
         SetAttackSpeed(atkSpeed);
