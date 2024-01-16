@@ -1,46 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class EnemyAI : MonoBehaviour
 {
     public Transform target;
-    float attackDelay;
-
     Enemy enemy;
-    Animator enemyAnimator;
+
+    DarkDragon dd;
+
     void Start()
     {
+        dd = GetComponent<DarkDragon>();
         enemy = GetComponent<Enemy>();
-    //    //enemyAnimator = enemy.//enemyAnimator;
+    }
+
+    void DecreaseDelay() //모든스킬 딜레이감소
+    {
+        for (int i = 0; i < enemy.SkillList.Length; i++)
+        {
+            enemy.SkillList[i].NowDelay -= Time.deltaTime;
+            if (enemy.SkillList[i].NowDelay < 0)
+                enemy.SkillList[i].NowDelay = 0;
+        }
     }
 
     void Update()
     {
-        attackDelay -= Time.deltaTime;
-        if (attackDelay < 0) attackDelay = 0;
-
+        Invoke("DecreaseDelay", 1f);
         // 타겟과 자신의 거리를 확인
         float distance = Vector3.Distance(transform.position, target.position);
 
-        // 공격 딜레이(쿨타임)가 0일 때, 시야 범위안에 들어올 때
-        if (attackDelay == 0 && distance <= enemy.fieldOfVision)
+        // 시야 범위안에 들어올 때
+        if (distance <= enemy.fieldOfVision)
         {
             FaceTarget(); // 타겟 바라보기
+            Debug.Log(enemy.isAttaking);
+            if (enemy.isAttaking)
+                MoveToTarget();
+            else
+            {
+                List<Skill> skill= new List<Skill>();
 
-            // 공격 범위안에 들어올 때 공격
-            if (distance <= enemy.atkRange)
-            {
-                AttackTarget();
-            }
-            else // 공격 애니메이션 실행 중이 아닐 때 추적
-            {
+                for (int i = 0; i < enemy.SkillList.Length; i++)
+                {
+                    if (enemy.SkillList[i].NowDelay == 0)
+                        if (distance <= enemy.SkillList[i].AtkField)
+                            skill.Add(enemy.SkillList[i]);
+                }
+
+                if(skill.Count > 0)
+                {
+                    int i = Random.Range(0, skill.Count);
+                    AttackTarget(skill[i]);
+                    skill.Clear();
+                }
+                else
                     MoveToTarget();
             }
-        }
-        else // 시야 범위 밖에 있을 때 Idle 애니메이션으로 전환
-        {
-            //enemyAnimator.SetBool("moving", false);
         }
     }
 
@@ -50,12 +69,7 @@ public class EnemyAI : MonoBehaviour
         float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
-
-        //if (distanceToPlayer < enemy.fieldOfVision && enemy.attacked)
-        {
-            transform.Translate(Vector3.right * enemy.moveSpeed * Time.deltaTime);
-        }
+        transform.Translate(Vector3.right * enemy.moveSpeed * Time.deltaTime);
     }
 
     void FaceTarget()
@@ -70,10 +84,10 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void AttackTarget()
+    void AttackTarget(Skill nowSkill)
     {
-        target.GetComponent<MoveScript>().nowHp -= enemy.atkDmg;
-        //enemyAnimator.SetTrigger("attack"); // 공격 애니메이션 실행
-        attackDelay = enemy.atkSpeed; // 딜레이 충전
+        enemy.isAttaking = true;
+        dd.SetState(nowSkill.AtkCode);
+        nowSkill.NowDelay = nowSkill.DelayTime; //딜레이 충전
     }
 }

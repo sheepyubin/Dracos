@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class FirPrf : MonoBehaviour
 {
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public float Speed = 10f;
+    private void Start()
     {
-        if(collision.tag == "Player")
-        {
-            Debug.Log("삭제됨");
-            Destroy(gameObject);
-        }
+        Destroy(gameObject, 2f);            //생성으로부터 2초 후 삭제
     }
 
+    private void Update()
+    {
+        transform.Translate(Vector2.right * (Speed * Time.deltaTime), Space.Self);
+    }
 }
