@@ -35,7 +35,7 @@ public class MoveScript : MonoBehaviour
     {
         maxHp = 50;
         nowHp = 50;
-        atkDmg = 10;
+        atkDmg = 30;
         //animator = GetComponent<Animator>;
         SetAttackSpeed(1.5f);
         rigidbody = GetComponent<Rigidbody>();
