@@ -6,7 +6,7 @@ public class RedDragon_Attack : MonoBehaviour
     public Vector3 targetSize = new Vector3(1.0f, 1.0f, 1.0f);
 
     public Color startColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-    public Color targetColor = new Color(1.0f, 0.0f, 0.0f, 0.0f);   
+    public Color targetColor = new Color(1.0f, 0.0f, 0.0f, 0.0f);
     public Color finalColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
     public float animationDuration = 2.0f;
@@ -29,25 +29,26 @@ public class RedDragon_Attack : MonoBehaviour
     {
         AtkStyle = FindObjectOfType<RedDragon_Move>().AtkStyle;
 
-        if(AtkStyle == 1)
+        if (AtkStyle == 1)
         {
             startSize = new Vector3(0.3f, 0.3f, 0.3f);
-            targetSize = new Vector3(1f, 1f, 1f);
+            targetSize = new Vector3(1.3f, 1.3f, 1.3f);
             moveSpeed = 7;
 
-        }else if (AtkStyle == 2)
+        }
+        else if (AtkStyle == 3)
         {
             moveSpeed = 17;
             startSize = new Vector3(1f, 1f, 1f);
             targetSize = new Vector3(2.3f, 2.3f, 2.3f);
         }
-        else if(AtkStyle == 3)
+        else if (AtkStyle == 4)
         {
             moveSpeed = 10;
             startSize = new Vector3(1f, 1f, 1f);
             targetSize = new Vector3(2f, 2f, 2f);
         }
-        else
+        else if (AtkStyle == 5)
         {
             moveSpeed = 8;
             startSize = new Vector3(0.5f, 0.5f, 0.5f);

@@ -23,7 +23,7 @@ public class RedDragon_Move : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, Player.position);
 
             // Check if the distance is less than or equal to 5 and isAttacking
-            if (distanceToPlayer <= 7 && !isAttacking)
+            if (distanceToPlayer <= 6.5 && !isAttacking)
             {
                 StartCoroutine(AttackMultipleTimes(Random.Range(10, 300), 0.02f));
             }
@@ -44,7 +44,7 @@ public class RedDragon_Move : MonoBehaviour
         isAttacking = true;
 
         AtkStyle = Random.Range(1, 101);
-        if (AtkStyle >= 1 && AtkStyle <= 30f)
+        if (AtkStyle >= 1 && AtkStyle <= 30)
         {
             AtkStyle = 1;
         }
@@ -52,14 +52,19 @@ public class RedDragon_Move : MonoBehaviour
         {
             AtkStyle = 2;
         }
-        else if (AtkStyle <= 80)
+        else if (AtkStyle <= 75)
         {
             AtkStyle = 3;
         }
-        else
+        else if (AtkStyle <= 90)
         {
             AtkStyle = 4;
         }
+        else
+        {
+            AtkStyle = 5;
+        }
+           
 
         for (int i = 0; i < count; i++)
         {
