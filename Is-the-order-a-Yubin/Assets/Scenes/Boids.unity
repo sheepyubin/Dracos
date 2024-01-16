@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boidPrefab: {fileID: 8983721535351775909, guid: 479a5d77d0bdf5240ab2db7228bca749, type: 3}
-  behavior: {fileID: 11400000, guid: c4477764cb024e448beb062d66f33740, type: 2}
-  numberOfBoid: 250
+  behavior: {fileID: 11400000, guid: 1c953de178de7f748a2be547b798cae5, type: 2}
+  numberOfBoid: 50
   AgentDensity: 0.08
   spawnRadius: 20
   driveFactor: 10
