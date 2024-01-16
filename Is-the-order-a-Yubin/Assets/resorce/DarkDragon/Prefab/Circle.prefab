@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2033762325666491077}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,5 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f481f230afcd0e848b06d2a269260d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  target: {x: 0, y: 0, z: 0}
+  Speed: 10

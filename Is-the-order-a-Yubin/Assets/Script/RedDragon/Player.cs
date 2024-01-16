@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float speed = 5f;
-    public float PlayerHP = 1000f;
+    public int PlayerHP = 1000;
 
     // 추가: 감지할 프리팹을 Inspector에서 설정
     public GameObject prefabToDetect;
@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("프리팹에 닿았습니다!");
 
             // 추가: HP 감소 및 디버그 출력
-            PlayerHP -= 1f;
+            PlayerHP -= 1;
             Debug.Log("플레이어 HP: " + PlayerHP);
 
             // 추가: HP가 0이하로 떨어졌을 때의 처리
