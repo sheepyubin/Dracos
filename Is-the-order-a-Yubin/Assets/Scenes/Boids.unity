@@ -156,6 +156,7 @@ MonoBehaviour:
   behavior: {fileID: 11400000, guid: c4477764cb024e448beb062d66f33740, type: 2}
   numberOfBoid: 250
   AgentDensity: 0.08
+  spawnRadius: 20
   driveFactor: 10
   maxSpeed: 5
   neighborRadius: 1.5
@@ -169,7 +170,7 @@ Transform:
   m_GameObject: {fileID: 1626545588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.867413, y: 1.9097137, z: -0.02600503}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Boids/Behavior/Alignment")]
+// 정령 규칙
 public class AlignmentBehavior : BoidsBehavior
 {
     public override Vector2 CalculateMove(BoidsAgent agent, List<Transform> context, Boids boid)
     {
-        // 근처에 없다면 기존 방향 반환
+        // 주변에 개체가 없으면 그대로 이동하
         if (context.Count == 0)
         {
             return agent.transform.up;
         }
 
+        // 이동 벡터
         Vector2 alignmentMove = Vector2.zero;
+
+        // 주변에 있는 개체들의 위치를 누적
         foreach (Transform item in context)
         {
             alignmentMove += (Vector2)item.transform.up;
         }
+
+        // 주변 개체들의 평균 방향 계산
         alignmentMove /= context.Count;
 
+        // 이동 벡터 반환
         return alignmentMove;
     }
 }
