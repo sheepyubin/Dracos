@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -20,37 +19,28 @@ public class DarkDragon : MonoBehaviour
     public Transform target;
     Vector3 whereToAtk;
     Vector3 playerPos;
-    Enemy enemy;
+
 
     private DarkDragonState dragonState;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        enemy = GetComponent<Enemy>();
         ChangeState(DarkDragonState.Idle);
-    }
-
-    public void SetState(int num)
-    {
-        switch(num)
-        {
-            case 0: ChangeState(DarkDragonState.Idle); break;
-            case 1: ChangeState(DarkDragonState.TailAttack); break;
-            case 2: ChangeState(DarkDragonState.ClawsAttack); break;
-            case 3: ChangeState(DarkDragonState.FireCircle); break;
-            case 4: ChangeState(DarkDragonState.EattingMob); break;
-            case 5: ChangeState(DarkDragonState.CircleShoot); break;
-            case 6: ChangeState(DarkDragonState.FanShoot); break;
-            default: break;
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
+        if (Input.GetKeyDown("1")) ChangeState(DarkDragonState.Idle);
+        else if (Input.GetKeyDown("2")) ChangeState(DarkDragonState.TailAttack);
+        else if (Input.GetKeyDown("3")) ChangeState(DarkDragonState.ClawsAttack);
+        else if (Input.GetKeyDown("4")) ChangeState(DarkDragonState.FireCircle);
+        else if (Input.GetKeyDown("5")) ChangeState(DarkDragonState.EattingMob);
+        else if (Input.GetKeyDown("6")) ChangeState(DarkDragonState.CircleShoot);
+        else if (Input.GetKeyDown("7")) ChangeState(DarkDragonState.FanShoot);
 
+    }
     private void ChangeState(DarkDragonState newState)
     {
         StopCoroutine(dragonState.ToString());
@@ -64,125 +54,96 @@ public class DarkDragon : MonoBehaviour
 
         while (true)
         {
+            Debug.Log("¿Ãµø¡ﬂ");
             yield return null;
         }
     }
     private IEnumerator TailAttack()
     {
-        int i = 0;
         Debug.Log("≤ø∏Æ∆Ú≈∏");
 
-        while (i < 0)
+        while (true)
         {
             Debug.Log("Ωÿæ◊");
+            ChangeState(DarkDragonState.Idle);
+            yield return null;
         }
-
-        enemy.isAttaking = false;
-
-        ChangeState(DarkDragonState.Idle);
-        yield return null;
     }
 
     private IEnumerator ClawsAttack()
     {
-        int i = 0;
         Debug.Log("πﬂ≈È∆Ú≈∏");
 
-        while (i < 0)
+        while (true)
         {
             Debug.Log("ƒ·");
+            ChangeState(DarkDragonState.Idle);
+            yield return null;
         }
-
-        enemy.isAttaking = false;
-
-        yield return null;
-        ChangeState(DarkDragonState.Idle);
     }
 
     private IEnumerator FireCircle()
     {
-        int i = 0;
+        int i = 1;
         Debug.Log("»≠ø∞");
 
-        while (i < 3)
+        while (true)
         {
-            i++;
+            if (i == 3) ChangeState(DarkDragonState.Idle); i++;
             Debug.Log("∂—Ω√∂—Ω√");
             yield return new WaitForSeconds(1);
         }
-        enemy.isAttaking = false;
-        ChangeState(DarkDragonState.Idle);
+        
     }
 
     private IEnumerator EattingMob()
     {
-        int i = 0;
+        int i = 1;
         Debug.Log("∏‘¿Ã≤¯æÓ¥Á±‚±‚");
 
-        while (i < 3)
+        while (true)
         {
-            i++;
+            if (i == 3) ChangeState(DarkDragonState.Idle); i++;
             Debug.Log("ƒÌøÕæ∆æ”");
             yield return new WaitForSeconds(1);
         }
-        enemy.isAttaking = false;
-        ChangeState(DarkDragonState.Idle);
     }
 
     private IEnumerator CircleShoot()
     {
-        int i = 0;
+        int i = 1;
         Debug.Log("ø¯«¸»≠ø∞±∏");
 
-        while (i < 3)
+        while (true)
         {
-            i++;
-            Circleshoot();
+            if (i == 3) ChangeState(DarkDragonState.Idle); i++;
+            fire();
             Debug.Log("≈‰µµµµµæ");
             yield return new WaitForSeconds(1);
         }
-        enemy.isAttaking = false;
-        ChangeState(DarkDragonState.Idle);
     }
 
     private IEnumerator FanShoot()
     {
-        int i = 0;
+        int i = 1;
         Debug.Log("∫Œ√§≤√»≠ø∞±∏");
 
-        while (i<3)
+        while (true)
         {
-            i++;
-            Fanshoot();
+            if (i == 3) ChangeState(DarkDragonState.Idle); i++;
             Debug.Log("ΩπΩπΩπΩπ");
             yield return new WaitForSeconds(1);
         }
-        enemy.isAttaking = false;
-        ChangeState(DarkDragonState.Idle);
     }
 
-    public Transform Target;
-
-    private void Circleshoot()
+    void fire()
     {
-        //360π¯ π›∫π
-        for (int i = 0; i < 360; i += 13)
+        for(int i = 0; i < 10; i++)
         {
-            GameObject temp = Instantiate(prfFire);
-            Destroy(temp, 2f);
-            temp.transform.position = transform.position;
-            temp.transform.rotation = Quaternion.Euler(0, 0, i);
-        }
-    }
-
-    private void Fanshoot()
-    {
-        for (int i = 0; i < 60; i += 6)
-        {
-            GameObject temp = Instantiate(prfFire);
-            Destroy(temp, 2f);
-            temp.transform.position = transform.position;
-            temp.transform.rotation = Quaternion.Euler(0, 0, i);
+            GameObject fire =
+                Instantiate(prfFire, transform.position, transform.rotation);
+            Rigidbody2D rigid = fire.GetComponent<Rigidbody2D>();
+            //rigid.AddForce(vector * 10, ForceMode2D.Impulse);
         }
     }
 
