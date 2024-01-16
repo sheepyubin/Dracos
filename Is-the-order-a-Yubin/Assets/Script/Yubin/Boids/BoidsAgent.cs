@@ -5,12 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class BoidsAgent : MonoBehaviour
 {
+
+    Boids agentBoid;
+    public Boids AgentBoid {  get { return agentBoid; } }
     Collider2D boidCollider;
     public Collider2D BoidCollider { get { return boidCollider; } }
 
     private void Start()
     {
         boidCollider = GetComponent<Collider2D>();
+    }
+
+    public void Initalize(Boids boid)
+    {
+        agentBoid = boid;
     }
 
     // Move()는 Boid 개체를 주어진 속도로 이동시키는 메서드

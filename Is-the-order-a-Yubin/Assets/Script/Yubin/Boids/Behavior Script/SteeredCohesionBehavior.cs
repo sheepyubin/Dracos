@@ -4,7 +4,7 @@ using UnityEngine;
 
 // 결합 규칙
 [CreateAssetMenu(menuName = "Boids/Behavior/SteeredCohesion")]
-public class SteeredCohesionBehavior : BoidsBehavior
+public class SteeredCohesionBehavior : FilteredBoidsBehavior
 {
     // 기존 이동 방향
     Vector2 currentVelocity;
@@ -20,9 +20,10 @@ public class SteeredCohesionBehavior : BoidsBehavior
 
         // 이동 벡터
         Vector2 cohesionMove = Vector2.zero;
+        List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
 
         // 주변에 있는 개체들의 위치를 누적
-        foreach (Transform i in context)
+        foreach (Transform i in filteredContext)
         {
             cohesionMove += (Vector2)i.position;
         }

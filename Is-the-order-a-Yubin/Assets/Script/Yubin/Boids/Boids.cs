@@ -17,7 +17,7 @@ public class Boids : MonoBehaviour
     public BoidsBehavior behavior;
 
     // Boid 개체의 개수 설정
-    [Range(10, 500)]
+    [Range(10, 10000)]
     public int numberOfBoid = 250;
 
     // Boid 개체의 생성 밀도 설정
@@ -36,7 +36,7 @@ public class Boids : MonoBehaviour
 
     // 다른 Boids 개체를 감지하는 범위
     [Range(1f, 10f)]
-    public float neighborRadius = 1.5f;
+    public float neighborRadius = 0.01f;
 
     // 다른 Boid 개체 회피 반경
     [Range(0f, 1f)]
@@ -50,6 +50,7 @@ public class Boids : MonoBehaviour
 
     private void Start()
     {
+
         // 제곱 미리 계산
         squareMaxSpeed = maxSpeed * maxSpeed;
         squareNeighborRadius = neighborRadius * neighborRadius;
@@ -61,6 +62,7 @@ public class Boids : MonoBehaviour
             Vector2 randomPosition = (Vector2)transform.position + Random.insideUnitCircle.normalized * Random.Range(0f, spawnRadius);
             BoidsAgent newAgent = Instantiate(boidPrefab, randomPosition, Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), transform);
             newAgent.name = "Agent " + i;
+            newAgent.Initalize(this);
             agents.Add(newAgent);
         }
     }
@@ -70,6 +72,8 @@ public class Boids : MonoBehaviour
         foreach (BoidsAgent agent in agents)
         {
             List<Transform> context = GetNearbyObjects(agent);
+
+            //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
 
             // 행동 계산 behavior.CalculateMove() 매서드 사용
             Vector2 move = behavior.CalculateMove(agent, context, this);
@@ -109,7 +113,7 @@ public class Boids : MonoBehaviour
     // 기즈모로 생성 범위 그리기
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = new Color(0.7f, 0.5f, 0.7f, 1.0f);
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
 }

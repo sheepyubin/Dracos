@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb94527dea7c2fa49bfd18c15054880c, type: 3}
   m_Name: Separation
   m_EditorClassIdentifier: 
+  filter: {fileID: 11400000, guid: d3deacd1ceaab9c4ca3b48117e6c1b37, type: 2}

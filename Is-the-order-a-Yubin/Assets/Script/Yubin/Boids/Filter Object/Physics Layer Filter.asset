@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046d765bad46b404dbb835fceab09f43, type: 3}
-  m_Name: Alignment
+  m_Script: {fileID: 11500000, guid: 457493c99fdf52044967a7add18408ce, type: 3}
+  m_Name: Physics Layer Filter
   m_EditorClassIdentifier: 
-  filter: {fileID: 11400000, guid: d3deacd1ceaab9c4ca3b48117e6c1b37, type: 2}
+  mask:
+    serializedVersion: 2
+    m_Bits: 64

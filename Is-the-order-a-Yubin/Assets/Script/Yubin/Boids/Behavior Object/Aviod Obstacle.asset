@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046d765bad46b404dbb835fceab09f43, type: 3}
-  m_Name: Alignment
+  m_Script: {fileID: 11500000, guid: eb94527dea7c2fa49bfd18c15054880c, type: 3}
+  m_Name: Aviod Obstacle
   m_EditorClassIdentifier: 
-  filter: {fileID: 11400000, guid: d3deacd1ceaab9c4ca3b48117e6c1b37, type: 2}
+  filter: {fileID: 11400000, guid: 14c3c593004f71142ad450c55aad772c, type: 2}

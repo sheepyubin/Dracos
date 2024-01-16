@@ -4,7 +4,7 @@ using UnityEngine;
 
 // 분리 규칙
 [CreateAssetMenu(menuName = "Boids/Behavior/Separation")]
-public class SeparationBehavoior : BoidsBehavior
+public class SeparationBehavoior : FilteredBoidsBehavior
 {
     public override Vector2 CalculateMove(BoidsAgent agent, List<Transform> context, Boids boid)
     {
@@ -20,8 +20,9 @@ public class SeparationBehavoior : BoidsBehavior
         // 근처에 있는 개체의 수
         int nSeparation = 0;
 
+        List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
         // 주변 개체들을 검사하여 행동 적용
-        foreach (Transform i in context)
+        foreach (Transform i in filteredContext)
         {
             if (Vector2.SqrMagnitude(i.position - agent.transform.position) < boid.SquareAvoidanceRadius)
             {
