@@ -143,7 +143,7 @@ public class DarkDragon : MonoBehaviour
             GameObject fire =
                 Instantiate(prfFire, transform.position, transform.rotation);
             Rigidbody2D rigid = fire.GetComponent<Rigidbody2D>();
-            rigid.AddForce(vector * 10, ForceMode2D.Impulse);
+            //rigid.AddForce(vector * 10, ForceMode2D.Impulse);
         }
     }
 
