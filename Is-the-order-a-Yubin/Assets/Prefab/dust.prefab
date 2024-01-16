@@ -112,7 +112,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-6317803042661011307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,14 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fecd54f3ee38f245b488e8ca8926349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   lifeTime: 2
   angle: 10
-  startSize: {x: 0.1, y: 0.1, z: 1}
-  targetSize: {x: 1, y: 1, z: 1}
-  startColor: {r: 0.6132076, g: 0.47395667, b: 0, a: 0}
-  targetColor: {r: 1, g: 0, b: 0, a: 0}
-  finalColor: {r: 0, g: 0, b: 0, a: 1}
-  animationDuration: 2
-  fadeDuration: 2
-  moveSpeed: 4

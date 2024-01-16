@@ -22,24 +22,22 @@ public class GroundDragonAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         cooldownTimer += Time.deltaTime;
 
         if (cooldownTimer >= nomalAttackCooldownTime)
         {
-            
-            StoneAttack();
             skill++;
-            if (skill >= 3)
-            {
+            if (skill > 3)
                 DustAttack();
-            }
-            
+            else
+                StoneAttack();
+
+
             isAttacking = false;
             cooldownTimer = 0f; // 타이머 초기화
         }
-
-
+        
     }
     void StoneAttack()
     {
